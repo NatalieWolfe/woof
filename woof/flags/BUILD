@@ -38,6 +38,7 @@ cc_library(
 
 cc_library(
   name = "flags",
+  visibility = ["//visibility:public"],
   hdrs = ["flags.h"],
   srcs = ["flags.cpp"],
   deps = [
@@ -58,7 +59,31 @@ cc_test(
 )
 
 cc_library(
+  name = "init_flags",
+  visibility = ["//woof/service:__subpackages__"],
+  hdrs = ["init_flags.h"],
+  srcs = ["init_flags.cpp"],
+  deps = [
+    ":cli",
+    ":flags",
+    "//woof/errors:canonical",
+    "//woof/errors:macros",
+  ],
+)
+
+cc_test(
+  name = "init_flags_test",
+  srcs = ["init_flags_test.cpp"],
+  deps = [
+    ":init_flags",
+    "@gtest//:gtest_main",
+    "//woof/errors:canonical",
+  ]
+)
+
+cc_library(
   name = "print_flags",
+  visibility = ["//visibility:public"],
   hdrs = ["print_flags.h"],
   srcs = ["print_flags.cpp"],
   deps = [
