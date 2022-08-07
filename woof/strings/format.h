@@ -7,7 +7,7 @@
 #include <type_traits>
 
 namespace woof {
-namespace impl {
+namespace internal {
 
 /**
  * Determines if the given duration can be losslessly converted to new units.
@@ -62,17 +62,17 @@ inline std::string format(const char* value) {
 template <typename Rep, typename Period>
 std::string format(const std::chrono::duration<Rep, Period>& duration) {
   using namespace std::chrono;
-  if (impl::can_convert_duration<years>(duration)) {
+  if (internal::can_convert_duration<years>(duration)) {
     return format(duration_cast<years>(duration).count()) + "y";
-  } else if (impl::can_convert_duration<days>(duration)) {
+  } else if (internal::can_convert_duration<days>(duration)) {
     return format(duration_cast<days>(duration).count()) + "d";
-  } else if (impl::can_convert_duration<hours>(duration)) {
+  } else if (internal::can_convert_duration<hours>(duration)) {
     return format(duration_cast<hours>(duration).count()) + "h";
-  } else if (impl::can_convert_duration<minutes>(duration)) {
+  } else if (internal::can_convert_duration<minutes>(duration)) {
     return format(duration_cast<minutes>(duration).count()) + "m";
-  } else if (impl::can_convert_duration<seconds>(duration)) {
+  } else if (internal::can_convert_duration<seconds>(duration)) {
     return format(duration_cast<seconds>(duration).count()) + "s";
-  } else if (impl::can_convert_duration<milliseconds>(duration)) {
+  } else if (internal::can_convert_duration<milliseconds>(duration)) {
     return format(duration_cast<milliseconds>(duration).count()) + "ms";
   } else {
     return format(duration_cast<nanoseconds>(duration).count()) + "ns";
