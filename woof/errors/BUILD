@@ -24,3 +24,20 @@ cc_test(
     "@gtest//:gtest_main",
   ],
 )
+
+cc_library(
+  name = "macros",
+  visibility = ["//visibility:public"],
+  hdrs = ["macros.h"],
+  deps = [":canonical"],
+)
+
+cc_test(
+  name = "macros_test",
+  srcs = ["macros_test.cpp"],
+  deps = [
+    ":canonical",
+    ":macros",
+    "@gtest//:gtest_main",
+  ]
+)
